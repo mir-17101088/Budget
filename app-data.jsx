@@ -173,6 +173,21 @@ function Hero({ tweaks }) {
   const heroPrefix = (tweaks.heroNumber || "").match(/^[^\d]*/)?.[0] || "";
   return (
     <section className="hero" data-screen-label="01 Hero">
+      <div className="hero-bg">
+        <video
+          className="hero-video"
+          src="assets/bangladesh.mp4"
+          poster="assets/bangladesh-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+        <div className="hero-bg-tint"></div>
+        <div className="hero-bg-vignette"></div>
+      </div>
       <div className="hero-dots"></div>
       <div className="hero-glow"></div>
 
@@ -189,15 +204,6 @@ function Hero({ tweaks }) {
           <span className="pill blue">14.9% of GDP</span>
           <span className="pill">97% implementation FY23</span>
         </div>
-      </div>
-
-      <div className="hero-corner left">
-        Reading time<br/>
-        <b>~9 minutes</b>
-      </div>
-      <div className="hero-corner right">
-        Source<br/>
-        <b>Ministry of Finance</b>
       </div>
 
       {tweaks.showStrip && (
