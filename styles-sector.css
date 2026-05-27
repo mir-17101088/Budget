@@ -197,3 +197,165 @@
 }
 .avg-callout .big { font-family: var(--serif); font-size: 48px; color: #6fc7ee; line-height: 1; font-weight: 500; }
 .avg-callout .txt { font-family: var(--body); font-size: 16px; color: var(--g2); line-height: 1.45; font-style: italic; max-width: 540px; }
+
+/* ============================================================
+   RESPONSIVE — Sector Deep Dive
+============================================================ */
+@media (max-width: 1100px) {
+  .sg-grid { grid-template-columns: 1fr 1fr; }
+  .gauge-row, .gauge-row.row2 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+@media (max-width: 960px) {
+  /* Cards: 2 cols */
+  .sg-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sg-card { padding: 22px 22px 20px; }
+  .sg-name { font-size: 20px; }
+  .sg-total { font-size: 24px; }
+
+  /* Expand */
+  .sg-expand { padding: 28px 24px 24px; border-radius: 16px; }
+  .sg-expand-head { gap: 18px; margin-bottom: 24px; }
+  .sg-expand-title h3 { font-size: 28px; }
+  .sg-expand-stats { gap: 22px; flex-wrap: wrap; }
+  .see-stat .v { font-size: 22px; }
+  .see-chart { height: 360px; }
+
+  /* Heatmap fits screen — compact cells, no horizontal scroll */
+  .heat-wrap { padding: 24px 18px; border-radius: 16px; }
+  .heat-table { border-spacing: 2px; }
+  .heat-table .h-cell { width: 100%; height: 24px; min-width: 0; }
+  .heat-table th.col-h { font-size: 10px; padding-bottom: 8px; letter-spacing: 0; }
+  .heat-table td.row-h {
+    font-size: 11px;
+    padding-right: 10px;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .heat-table .sum-h { font-size: 14px; padding-left: 12px; }
+
+  /* Rankings: smaller meta col */
+  .rk-row { grid-template-columns: 28px 1fr 100px; gap: 12px; }
+  .rk-num { font-size: 18px; }
+  .rk-row.top .rk-num { font-size: 22px; }
+  .rk-pct { font-size: 18px; }
+  .rk-bar-bg { height: 32px; }
+  .rk-bar { padding: 0 12px; }
+  .rk-name { font-size: 12px; }
+
+  /* Gauges */
+  .gauge-row, .gauge-row.row2 { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .gauge-cell { padding: 10px 6px 10px; }
+  .gauge-svg { width: 64px; height: 64px; }
+  .gauge-cell .pct { font-size: 18px; }
+  .gauge-cell .lbl { font-size: 8px; }
+  .gauge-cell .yr { font-size: 9px; }
+
+  .avg-callout { padding: 20px 22px; gap: 16px; }
+  .avg-callout .big { font-size: 36px; }
+  .avg-callout .txt { font-size: 14px; }
+}
+
+@media (max-width: 640px) {
+  /* Cards: single col */
+  .sg-grid { grid-template-columns: 1fr; gap: 14px; }
+  .sg-card { padding: 20px 20px 18px; border-radius: 14px; }
+  .sg-name { font-size: 18px; margin-bottom: 12px; }
+  .sg-stats { margin-bottom: 12px; }
+  .sg-total { font-size: 22px; }
+  .sg-cta { font-size: 10px; }
+
+  /* Expanded */
+  .sg-expand { padding: 22px 16px 20px; border-radius: 14px; margin-top: 20px; }
+  .sg-expand-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+  .sg-expand-title h3 { font-size: 22px; }
+  .sg-expand-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .see-stat .v { font-size: 18px; }
+  .see-stat .l { font-size: 9px; }
+  .see-stat .s { font-size: 10px; }
+  .see-toggle button { font-size: 10px; padding: 6px 12px; }
+  .see-chart { height: 280px; }
+  .see-legend { gap: 14px; font-size: 10px; }
+
+  /* Heatmap — compact for phones, vertical column labels, fits screen */
+  .heat-wrap { padding: 16px 10px; border-radius: 14px; }
+  .heat-table { border-spacing: 1.5px; }
+  .heat-table .h-cell { width: 100%; height: 18px; min-width: 0; border-radius: 2px; }
+  /* Hide the ▲/▼ glyphs on small screens — color alone conveys direction */
+  .heat-table .h-cell.up::after,
+  .heat-table .h-cell.dn::after { content: none; }
+  /* Vertical (rotated) column headers so 17 narrow columns fit */
+  .heat-table th.col-h {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 9px;
+    letter-spacing: 0;
+    padding: 4px 0 6px;
+    color: var(--g4);
+    white-space: nowrap;
+    height: auto;
+    vertical-align: bottom;
+  }
+  .heat-table th.col-h.rises-h {
+    writing-mode: horizontal-tb;
+    transform: none;
+    text-align: left;
+    padding-left: 6px !important;
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+  }
+  .heat-table td.row-h {
+    font-size: 10.5px;
+    padding-right: 4px;
+    max-width: 86px;
+    width: 86px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .heat-table td.row-h .row-sw { margin-right: 6px !important; width: 6px !important; height: 6px !important; }
+  .heat-table .sum-h { font-size: 12px; padding-left: 6px; white-space: nowrap; }
+  .heat-table .sum-h .of { font-size: 9px; }
+
+  /* Rankings */
+  .rk-row { grid-template-columns: 22px 1fr 78px; gap: 10px; }
+  .rk-num { font-size: 16px; }
+  .rk-row.top .rk-num { font-size: 18px; }
+  .rk-bar-bg { height: 30px; }
+  .rk-bar { padding: 0 10px; min-width: 38px; }
+  .rk-name { font-size: 11px; }
+  .rk-sub { font-size: 10px; margin-left: 6px; }
+  .rk-pct { font-size: 15px; }
+  .rk-amt { font-size: 10px; }
+
+  /* Gauges: 3 cols */
+  .gauge-row, .gauge-row.row2 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .gauge-row.row2 { margin-top: 10px; }
+  .gauge-svg { width: 60px; height: 60px; }
+  .gauge-cell .pct { font-size: 16px; }
+
+  .avg-callout {
+    flex-direction: column; align-items: flex-start; gap: 10px;
+    padding: 18px;
+  }
+  .avg-callout .big { font-size: 30px; }
+  .avg-callout .txt { font-size: 13px; }
+}
+
+@media (max-width: 400px) {
+  .sg-expand-stats { grid-template-columns: 1fr; }
+  .gauge-row, .gauge-row.row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rk-row { grid-template-columns: 18px 1fr 68px; gap: 8px; }
+  .heat-wrap { padding: 14px 8px; }
+  .heat-table td.row-h { max-width: 70px; width: 70px; font-size: 9.5px; padding-right: 3px; }
+  .heat-table .h-cell { height: 16px; }
+  .heat-table th.col-h { font-size: 8px; padding: 4px 0 4px; }
+  .heat-table .sum-h { font-size: 10.5px; padding-left: 4px; }
+  .heat-table .sum-h .of { font-size: 8px; }
+}

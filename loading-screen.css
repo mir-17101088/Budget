@@ -85,3 +85,11 @@
 
 /* No-flash: hide everything else under the loader until ready */
 body.app-loading { overflow: hidden; }
+
+@media (max-width: 640px) {
+  #app-loader { gap: 32px; padding: 0 20px; }
+  .ls-mark { font-size: 52px; }
+  .ls-progress { width: 180px; }
+  .ls-eyebrow { font-size: 10px; letter-spacing: 0.24em; gap: 12px; text-align: center; }
+  .ls-eyebrow::before, .ls-eyebrow::after { width: 18px; }
+}

@@ -39,8 +39,9 @@ html, body {
   color: #fff;
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
+html { overflow-x: clip; }
+body { overflow-x: clip; }
 
 ::selection { background: var(--blue); color: #fff; }
 
@@ -313,19 +314,35 @@ section.s {
   position: relative;
   pointer-events: auto;
   cursor: pointer;
-  transition: filter .2s, transform .25s, box-shadow .25s;
+  transition: filter .2s, transform .25s, box-shadow .25s, opacity .2s;
   display: flex; align-items: flex-end; justify-content: center;
   padding-bottom: 14px;
   mix-blend-mode: multiply;
-  opacity: 0.78;
+  opacity: 0.55;
 }
 .taka-seg::before {
   content: ""; position: absolute; inset: 0;
   background: inherit; mix-blend-mode: normal; opacity: 0;
   transition: opacity .2s;
 }
-.taka-seg:hover { opacity: 1; }
-.taka-seg.active { opacity: 1; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45); }
+.taka-seg:hover {
+  opacity: 1;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.85),
+    0 0 24px rgba(255,255,255,0.35);
+  z-index: 3;
+  filter: saturate(1.3) brightness(1.1);
+}
+.taka-seg:hover::before { opacity: 0.5; }
+.taka-seg.active {
+  opacity: 1;
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,0.95),
+    inset 0 0 0 5px rgba(0,0,0,0.25),
+    0 0 30px rgba(255,255,255,0.45);
+  z-index: 2;
+}
+.taka-seg.active::before { opacity: 0.45; }
 .taka-seg .seg-num {
   position: relative;
   font-family: var(--ui); font-size: 11px; font-weight: 700;
@@ -658,3 +675,232 @@ footer {
 .hero-strip-cell .num { font-family: var(--serif); font-size: 26px; color: #fff; }
 .hero-strip-cell .delta { font-family: var(--ui); font-size: 11px; color: #5fe093; margin-left: 8px; }
 .hero-strip-cell .delta.red { color: #ff7676; }
+
+/* ============================================================
+   RESPONSIVE — tablet & mobile
+============================================================ */
+
+/* Always-on smaller wraps as viewport shrinks */
+@media (max-width: 1100px) {
+  .wrap { padding: 0 32px; }
+  h1 { font-size: 56px; }
+  h2 { font-size: 40px; }
+  section.s { padding: 96px 0; }
+}
+
+/* ----- Tablet (≤ 960px) ----- */
+@media (max-width: 960px) {
+  .wrap { padding: 0 28px; }
+  h1 { font-size: 48px; }
+  h2 { font-size: 34px; line-height: 1.1; }
+  h3 { font-size: 24px; }
+  .lede { font-size: 17px; }
+  section.s { padding: 80px 0; }
+  .section-head { margin-bottom: 40px; }
+
+  /* Nav */
+  .nav { height: 60px; }
+  .nav-brand img { height: 18px; }
+  .nav-section { font-size: 10px; letter-spacing: 0.18em; }
+  .nav-links { gap: 22px; }
+  .nav-link { font-size: 12px; }
+  .nav-badge { font-size: 9px; padding: 6px 12px; letter-spacing: 0.16em; }
+
+  /* Hero corners off so they can't collide */
+  .hero-corner { display: none; }
+  .hero {
+    min-height: clamp(440px, 72svh, 620px);
+    padding: clamp(40px, 6vh, 72px) 0 clamp(110px, 14vh, 160px);
+  }
+
+  /* Hero strip: 4 → 2 cols */
+  .hero-strip-inner { grid-template-columns: 1fr 1fr; }
+  .hero-strip-cell { padding: 16px 20px; }
+  .hero-strip-cell:nth-child(2) { border-right: 0; }
+  .hero-strip-cell:nth-child(1), .hero-strip-cell:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .hero-strip-cell .num { font-size: 22px; }
+
+  /* GDP: stack */
+  .gdp-wrap { grid-template-columns: 1fr; gap: 28px; }
+  .gdp-svg { height: 320px; }
+  .gdp-stat-card .big { font-size: 52px; }
+
+  /* Taka section: smaller bars + padding */
+  .taka-expand { padding: 28px 24px 24px; }
+  .taka-bars { gap: 16px; }
+
+  /* Treemap: shorter */
+  .treemap { height: 460px; }
+
+  /* Debt */
+  .debt-callout .big { font-size: 44px; }
+  .debt-chart-wrap { padding: 28px 24px; }
+  .debt-svg { height: 360px; }
+
+  /* News: 3 → 2 */
+  .news-grid { grid-template-columns: 1fr 1fr; gap: 22px; }
+
+  /* Footer: 4 → 2 cols */
+  .foot-top { grid-template-columns: 1fr 1fr; gap: 36px 28px; }
+  .foot-brand { grid-column: 1 / -1; }
+}
+
+/* ----- Mobile (≤ 640px) ----- */
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; line-height: 1.15; }
+  h3 { font-size: 20px; }
+  .lede { font-size: 15px; line-height: 1.5; }
+  .body { font-size: 14px; }
+  section.s { padding: 60px 0; }
+  .section-head { margin-bottom: 32px; }
+  .section-head .eyebrow { font-size: 10px; letter-spacing: 0.18em; }
+
+  /* Nav: compact — drop the section label and shrink links */
+  .nav { height: 56px; }
+  .nav-inner { gap: 10px; }
+  .nav-brand { gap: 8px; }
+  .nav-brand img { height: 16px; }
+  .nav-divider, .nav-section { display: none; }
+  .nav-links {
+    gap: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { font-size: 11px; white-space: nowrap; padding: 4px 0; letter-spacing: 0.02em; }
+  .nav-link.active::after { bottom: -18px; }
+  .nav-badge { display: none; }
+
+  /* Hero — content-sized on mobile, no huge min-height, no absolute strip */
+  .hero {
+    padding: 44px 0 36px;
+    min-height: 0;
+    display: block;
+  }
+  .hero-content { padding: 0 8px; max-width: 100%; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 0.22em; gap: 8px; justify-content: center; }
+  .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; }
+  .hero-fy { font-size: 22px; margin-bottom: 14px; }
+  .hero-num {
+    font-size: clamp(48px, 14vw, 72px);
+    line-height: 1;
+    white-space: nowrap;
+    display: block;
+  }
+  .hero-num .unit { font-size: 0.32em; vertical-align: 0.55em; margin-left: 6px; }
+  .hero-cap { font-size: 13px; padding: 0 8px; text-align: center; margin-top: 14px; }
+  .hero-pills { gap: 8px; padding: 0 12px; margin-top: 22px; }
+  .pill { font-size: 11px; padding: 6px 12px; }
+  .hero-scroll { display: none; }
+  .hero-glow { width: 600px; height: 600px; }
+
+  /* Hero strip: static row of 2×2, sits naturally below the hero */
+  .hero-strip { position: static; margin-top: 32px; }
+  .hero-strip-inner { grid-template-columns: 1fr 1fr; }
+  .hero-strip-cell {
+    padding: 14px 16px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .hero-strip-cell:nth-child(2n) { border-right: 0; }
+  .hero-strip-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .hero-strip-cell .lbl { font-size: 9px; }
+  .hero-strip-cell .num { font-size: 18px; }
+  .hero-strip-cell .delta { font-size: 10px; margin-left: 4px; display: block; margin-top: 4px; }
+
+  /* Taka section */
+  .taka-stage { max-width: 100%; }
+  .taka-seg .seg-num { font-size: 9px; }
+  .taka-tooltip { font-size: 11px; padding: 8px 10px; }
+  .taka-tooltip .t-amt { font-size: 18px; }
+  .taka-legend { gap: 6px; margin-top: 28px; }
+  .chip { font-size: 11px; padding: 5px 10px; }
+  .taka-expand { padding: 22px 16px 20px; margin-top: 32px; border-radius: 14px; }
+  .taka-expand-head { margin-bottom: 22px; }
+  .taka-expand h3 { font-size: 20px; }
+  .taka-bars { gap: 8px; height: 180px; padding-top: 22px; }
+  .taka-bar .val { font-size: 11px; top: -20px; }
+  .taka-bar .yr { font-size: 9px; }
+
+  /* GDP */
+  .gdp-chart-wrap { padding: 22px 16px; border-radius: 14px; }
+  .gdp-svg { height: 260px; }
+  .gdp-stat-card { padding: 24px 22px; border-radius: 14px; }
+  .gdp-stat-card .big { font-size: 42px; }
+  .gdp-toggle button { font-size: 10px; padding: 6px 12px; }
+  .gdp-tip { padding: 8px 10px 9px; }
+  .gdp-tip-pct { font-size: 22px; }
+
+  /* Treemap */
+  .treemap { height: 380px; border-radius: 14px; }
+  .tm-cell { padding: 10px; }
+  .tm-fo.big .tm-fo-name { font-size: 16px; }
+  .tm-fo.big .tm-fo-pct { font-size: 22px; }
+  .tm-fo.med .tm-fo-name { font-size: 11px; }
+  .tm-fo.med .tm-fo-pct { font-size: 13px; }
+  .tm-fo.sm .tm-fo-name { font-size: 9px; }
+  .tm-fo.sm .tm-fo-pct { font-size: 10px; }
+
+  /* Debt */
+  .debt-callout {
+    padding: 16px 18px; gap: 10px;
+    flex-direction: column; align-items: flex-start;
+  }
+  .debt-callout .big { font-size: 38px; }
+  .debt-callout .txt { font-size: 14px; max-width: none; }
+  .debt-chart-wrap { padding: 22px 16px; border-radius: 14px; }
+  .debt-svg { height: 300px; }
+  .debt-legend { gap: 12px; font-size: 10px; }
+  .debt-chart-wrap > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* News: 1 col */
+  .news-grid { grid-template-columns: 1fr; gap: 18px; }
+  .news-body { padding: 20px 20px 22px; }
+  .news-headline { font-size: 19px; }
+  .news-dek { font-size: 13px; }
+
+  /* News head: stack the "All stories" link below */
+  .s-news .section-head {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px;
+  }
+
+  /* Footer */
+  footer { padding: 56px 0 24px; }
+  .foot-top { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+  .foot-brand { grid-column: 1 / -1; }
+  .foot-brand img { height: 22px; margin-bottom: 14px; }
+  .foot-brand p { font-size: 12px; }
+  .foot h4 { font-size: 10px; margin-bottom: 12px; }
+  .foot li { font-size: 13px; }
+  .foot-bottom {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 40px;
+    font-size: 10px;
+  }
+}
+
+/* ----- Small mobile (≤ 400px) ----- */
+@media (max-width: 400px) {
+  .wrap { padding: 0 16px; }
+  h2 { font-size: 24px; }
+  section.s { padding: 48px 0; }
+  .hero { padding: 36px 0 28px; }
+  .hero-num { font-size: clamp(40px, 13vw, 60px); }
+  .hero-fy { font-size: 18px; }
+  .hero-pills { flex-direction: column; align-items: center; }
+  .nav-links { gap: 12px; }
+  .nav-link { font-size: 10.5px; }
+  .taka-bars { gap: 6px; }
+  .treemap { height: 340px; }
+  .debt-svg { height: 240px; }
+  .foot-top { grid-template-columns: 1fr; }
+}

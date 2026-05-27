@@ -16,7 +16,20 @@ function TakaSection() {
       // wait one tick for the re-render so the chart is the new sector
       requestAnimationFrame(() => {
         const r = expandRef.current.getBoundingClientRect();
-        window.scrollTo({ top: window.scrollY + r.top - 80, behavior: "smooth" });
+        const vh = window.innerHeight;
+        const chartH = r.height;
+        // Anchor the bar chart at the LOWER end of the viewport so the user
+        // still sees part of the 100-taka note above it.
+        // If the chart fits in the viewport, align its bottom near the
+        // viewport bottom (with a small gap). Otherwise, fall back to
+        // pinning the chart's top about 1/3 of the way down.
+        let targetTop;
+        if (chartH + 24 < vh) {
+          targetTop = window.scrollY + r.bottom - vh + 24;
+        } else {
+          targetTop = window.scrollY + r.top - vh * 0.30;
+        }
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
       });
     }
   };

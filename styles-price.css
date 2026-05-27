@@ -312,3 +312,124 @@
 .cl-row .sw { width: 10px; height: 10px; border-radius: 3px; }
 .cl-row .nm { font-family: var(--ui); font-size: 12px; color: var(--g2); flex: 1; }
 .cl-row .vl { font-family: var(--ui); font-size: 12px; font-weight: 700; color: #fff; }
+
+/* ============================================================
+   RESPONSIVE — Price Impact
+============================================================ */
+@media (max-width: 1100px) {
+  .page-hero h1 { font-size: 56px; }
+  .titleblock .text h2 { font-size: 44px; }
+}
+
+@media (max-width: 960px) {
+  .page-hero { padding: 48px 0 40px; }
+  .page-hero h1 { font-size: 44px; line-height: 1.05; }
+  .page-hero .dek { font-size: 16px; }
+  .page-hero-stats { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .phs-cell { padding: 14px 18px; }
+  .phs-cell .n { font-size: 30px; }
+
+  /* Items: 3 → 2 */
+  .item-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .item-card { padding: 22px 22px 20px; min-height: 220px; }
+  .item-icon { width: 48px; height: 48px; margin-bottom: 18px; }
+  .item-name { font-size: 19px; }
+
+  /* Title + arrow */
+  .titleblock { gap: 22px; margin-bottom: 48px; }
+  .titleblock .arrow { width: 72px; height: 72px; font-size: 36px; }
+  .titleblock .text h2 { font-size: 36px; }
+  .titleblock .text .dek { font-size: 15px; }
+
+  /* Tax split */
+  .split2 { grid-template-columns: 1fr; gap: 28px; }
+  .donut-wrap, .donut-legend { padding: 28px 22px; }
+  .donut-center .n { font-size: 38px; }
+
+  /* Subsidies */
+  .sub-chart-wrap { padding: 28px 24px 24px; border-radius: 14px; }
+  .sub-bars { gap: 16px; height: 220px; padding-top: 28px; }
+  .sub-bar .v { font-size: 18px; top: -26px; }
+  .sub-callout { gap: 16px; padding: 20px 22px; }
+  .sub-callout .big { font-size: 38px; }
+  .sub-callout .txt { font-size: 14px; }
+
+  /* Calculator */
+  .calc-wrap { grid-template-columns: 1fr; gap: 28px; }
+  .calc-left, .calc-right { padding: 28px 24px; border-radius: 16px; }
+  .calc-q { font-size: 28px; }
+  .slider-vals .val { font-size: 32px; }
+  .calc-pie-wrap { max-width: 280px; }
+  .calc-pie-center .n { font-size: 44px; }
+}
+
+@media (max-width: 640px) {
+  .page-hero { padding: 36px 0 32px; }
+  .page-hero .crumb { font-size: 10px; letter-spacing: 0.16em; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+  .page-hero h1 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .page-hero .dek { font-size: 14px; line-height: 1.5; }
+  .page-hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .phs-cell { padding: 12px 14px; }
+  .phs-cell .l { font-size: 9px; margin-bottom: 6px; }
+  .phs-cell .n { font-size: 24px; }
+  .phs-cell .s { font-size: 11px; }
+
+  /* Items 1 col */
+  .item-grid { grid-template-columns: 1fr; gap: 14px; }
+  .item-card { padding: 20px; min-height: 0; }
+  .item-icon { width: 44px; height: 44px; margin-bottom: 14px; }
+  .item-icon svg { width: 24px; height: 24px; }
+  .item-name { font-size: 18px; }
+  .item-sub { font-size: 10px; }
+  .item-duty { font-size: 13px; }
+
+  /* See more */
+  .see-more { padding: 12px 18px 12px 22px; font-size: 11px; letter-spacing: 0.12em; }
+
+  /* Title block: stack arrow above text */
+  .titleblock { flex-direction: column; gap: 18px; margin-bottom: 36px; }
+  .titleblock .arrow { width: 56px; height: 56px; font-size: 28px; border-radius: 14px; }
+  .titleblock .text h2 { font-size: 28px; margin-bottom: 12px; }
+  .titleblock .text .dek { font-size: 14px; }
+
+  /* Donut: don't make legend too cramped */
+  .donut-wrap { padding: 22px 16px; }
+  .donut-svg { max-width: 260px; }
+  .donut-center .n { font-size: 32px; }
+  .donut-legend { padding: 18px 14px; gap: 8px; }
+  .dl-row { padding: 10px 12px; gap: 12px; }
+  .dl-row .pct { font-size: 18px; }
+
+  /* Subsidies */
+  .sub-chart-wrap { padding: 22px 14px 20px; }
+  .sub-bars { gap: 8px; height: 180px; padding-top: 24px; }
+  .sub-bar .v { font-size: 13px; top: -22px; }
+  .sub-bar.future .v { font-size: 11px; }
+  .sub-bar .yr { font-size: 9px; }
+  .sub-bar .delta { font-size: 9px; padding: 1px 4px; bottom: 22px; }
+  .sub-callout { flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px; }
+  .sub-callout .big { font-size: 32px; }
+  .sub-callout .txt { font-size: 13px; }
+
+  /* Calculator */
+  .calc-left, .calc-right { padding: 22px 18px; border-radius: 14px; }
+  .calc-illus { font-size: 9px; padding: 5px 10px; }
+  .calc-q { font-size: 22px; line-height: 1.2; }
+  .slider-vals .lbl { font-size: 10px; }
+  .slider-vals .val { font-size: 26px; }
+  .bracket-pill { padding: 10px 14px; gap: 10px; }
+  .bracket-pill .v { font-size: 16px; }
+  .calc-pie-wrap { max-width: 240px; }
+  .calc-pie-center .n { font-size: 36px; }
+  .calc-pie-center .e { font-size: 9px; }
+  .calc-legend { grid-template-columns: 1fr; gap: 6px; margin-top: 20px; }
+}
+
+@media (max-width: 400px) {
+  .page-hero h1 { font-size: 28px; }
+  .page-hero-stats { grid-template-columns: 1fr; }
+  .titleblock .text h2 { font-size: 24px; }
+  .sub-bars { gap: 6px; }
+  .calc-pie-wrap { max-width: 200px; }
+  .calc-pie-center .n { font-size: 32px; }
+}

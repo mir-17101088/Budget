@@ -24,7 +24,7 @@ function HeatmapSection() {
               <tr>
                 <th></th>
                 {fyCols.map(y => <th key={y} className="col-h">{y}</th>)}
-                <th className="col-h" style={{ paddingLeft: 18, textAlign: "left" }}>RISES</th>
+                <th className="col-h rises-h" style={{ paddingLeft: 18, textAlign: "left" }}>RISES</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@ function HeatmapSection() {
                 return (
                   <tr key={s.k}>
                     <td className="row-h">
-                      <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: 2, background: s.color, marginRight: 10, verticalAlign: "middle" }}></span>
+                      <span className="row-sw" style={{ display: "inline-block", width: 8, height: 8, borderRadius: 2, background: s.color, marginRight: 10, verticalAlign: "middle" }}></span>
                       {s.name}
                     </td>
                     {pat.map((p, j) => (

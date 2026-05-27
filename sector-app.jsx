@@ -2,17 +2,28 @@ function SectorApp() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [active, setActive] = React.useState("defence");
 
-  // scroll expanded panel into view when changing sector — but NOT on first mount
+  // Center the bar chart in the viewport whenever the sector changes (not on first mount)
   const expandRef = React.useRef(null);
   const didMount = React.useRef(false);
   React.useEffect(() => {
     if (!didMount.current) { didMount.current = true; return; }
-    if (expandRef.current) {
-      const r = expandRef.current.getBoundingClientRect();
-      if (r.top < 0 || r.top > window.innerHeight) {
-        window.scrollTo({ top: window.scrollY + r.top - 100, behavior: "smooth" });
+    // Wait a tick so the new sector has rendered, then center the bar chart svg
+    requestAnimationFrame(() => {
+      if (!expandRef.current) return;
+      const chart = expandRef.current.querySelector(".see-chart");
+      const target = chart || expandRef.current;
+      const r = target.getBoundingClientRect();
+      const vh = window.innerHeight;
+      let targetTop;
+      if (r.height + 32 <= vh) {
+        // chart fits — center it vertically
+        targetTop = window.scrollY + r.top - (vh - r.height) / 2;
+      } else {
+        // taller than viewport — pin top with small offset so most is visible
+        targetTop = window.scrollY + r.top - 24;
       }
-    }
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+    });
   }, [active]);
 
   return (
