@@ -15,9 +15,9 @@ function SectorApp() {
       const r = target.getBoundingClientRect();
       const vh = window.innerHeight;
       let targetTop;
-      if (r.height + 32 <= vh) {
-        // chart fits — center it vertically
-        targetTop = window.scrollY + r.top - (vh - r.height) / 2;
+      if (r.height + 24 <= vh) {
+        // chart fits — anchor its bottom near the viewport bottom (24px gap)
+        targetTop = window.scrollY + r.bottom - vh + 24;
       } else {
         // taller than viewport — pin top with small offset so most is visible
         targetTop = window.scrollY + r.top - 24;
